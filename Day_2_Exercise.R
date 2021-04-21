@@ -10,7 +10,7 @@ library(ggpubr)
 library(Rmisc)
 
 #Read in data
-snakes <- read.csv("data/snakes.csv")
+snakes <- read_csv("data/snakes.csv")
 snakes$day = as.factor(snakes$day) #converts day to factor, as ANOVA work with factor independent variable
 
 #create summaries of data
@@ -64,3 +64,9 @@ ggplot(snakes, aes(x = snake, y = openings, fill = snake)) +
   theme(axis.ticks.y = element_blank(), axis.text.y = element_blank(), panel.grid = element_blank()) +
   coord_flip()
   
+ggplot(snakes, aes(x = day, y = openings, fill = snake)) + 
+  geom_col(position = "dodge", col = "black") +
+  scale_fill_brewer(palette = "YlGn") +
+  theme_bw() +
+  labs(title = "SNAKES!", x = "Days", y = "Openings", fill = "Snake") +
+  theme(plot.title = element_text(size = 20, face = "bold"))
